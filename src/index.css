@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-blue: #4a90e2;
+  --primary-purple: #9c6ade;
+  --accent-cyan: #00f0ff;
+  --accent-violet: #b14aff;
+  --deep-space: #0a0b1a;
+  --cosmic-gray: #1e1f2e;
+  --starlight: #f5f7ff;
+  --nebula-white: #ffffff;
+
+  --cosmic-gradient: linear-gradient(135deg, #4a90e2 0%, #9c6ade 100%);
+  --neon-gradient: linear-gradient(180deg, #00f0ff 0%, #b14aff 100%);
+  --space-gradient: linear-gradient(180deg, #0a0b1a 0%, #1e1f2e 100%);
+
+  --background-primary-light: var(--starlight);
+  --background-secondary-light: #eef1ff;
+  --text-primary-light: var(--deep-space);
+  --text-secondary-light: var(--cosmic-gray);
+  --accent-light: var(--primary-purple);
+  --button-bg-light: var(--primary-blue);
+  --button-text-light: var(--nebula-white);
+  --card-bg-light: rgba(255, 255, 255, 0.9);
+  --card-border-light: rgba(74, 144, 226, 0.2);
+  --hover-light: rgba(156, 106, 222, 0.1);
+
+  --background-primary-dark: var(--deep-space);
+  --background-secondary-dark: var(--cosmic-gray);
+  --text-primary-dark: var(--nebula-white);
+  --text-secondary-dark: rgba(255, 255, 255, 0.7);
+  --accent-dark: var(--accent-cyan);
+  --button-bg-dark: var(--primary-purple);
+  --button-text-dark: var(--nebula-white);
+  --card-bg-dark: rgba(13, 15, 50, 0.9);
+  --card-border-dark: rgba(156, 106, 222, 0.2);
+  --hover-dark: rgba(0, 240, 255, 0.1);
+
+  --glass-bg-light: rgba(255, 255, 255, 0.7);
+  --glass-bg-dark: rgba(10, 11, 26, 0.7);
+  --glass-border-light: rgba(255, 255, 255, 0.2);
+  --glass-border-dark: rgba(74, 144, 226, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+
+  --glow-blue: 0 0 20px rgba(74, 144, 226, 0.5);
+  --glow-purple: 0 0 20px rgba(156, 106, 222, 0.5);
+  --glow-cyan: 0 0 20px rgba(0, 240, 255, 0.5);
+}
+
+:root[class~="dark"] {
+  --background: var(--background-primary-dark);
+  --background-secondary: var(--background-secondary-dark);
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --accent: var(--accent-dark);
+  --button-bg: var(--button-bg-dark);
+  --button-text: var(--button-text-dark);
+  --card-bg: var(--card-bg-dark);
+  --card-border: var(--card-border-dark);
+  --hover: var(--hover-dark);
+  --glass-bg: var(--glass-bg-dark);
+  --glass-border: var(--glass-border-dark);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #0a0b1a #1e1f2e;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--glass-shadow);
+  border-radius: 16px;
+}
+
+.neon-button {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.neon-button:hover {
+  box-shadow: var(--glow-purple);
+  transform: translateY(-2px);
+}
+
+.feature-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--accent);
+}
+
+.hero-section {
+  background: var(--space-gradient);
+  color: var(--text-primary);
+}
+
+.accent-border {
+  border-bottom: 2px solid var(--accent);
+}
+.withdrawal-form label {
+	font-size: 1.2rem;
+	margin: 20px 0px 10px 0px;
+	color: var(--text-primary);
+}

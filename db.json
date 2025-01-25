@@ -1,0 +1,48 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "jane123",
+      "fullname": "Jane Doe",
+      "passwordHash": "$2b$10$TuwTbpVYBdrFwvhPvq.R4OVUoISVVUv9.PwJKyCnV1U0ZgzFTrJ4K",
+      "email": "jane@example.com",
+      "referralLink": "https://example.com/ref/jane123",
+      "balance": 150,
+      "referralBalance": 100,
+      "taskBalance": 50,
+      "isVIP": true,
+      "referrals": [2, 3],
+      "tasksCompleted": 5
+    },
+    {
+      "id": 2,
+      "username": "robert456",
+      "fullname": "Robert Fox",
+      "passwordHash": "$2b$10$kLvJLZNZ5G7e.KMz8ruwoeBtxR03ZsfQjWVeySYkWl6iEnlEdqFW",
+      "email": "robert@example.com",
+      "referralLink": "https://example.com/ref/robert456",
+      "balance": 50,
+      "referralBalance": 30,
+      "taskBalance": 20,
+      "isVIP": false,
+      "referrals": [],
+      "tasksCompleted": 3
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Watch Intro Video",
+      "reward": 5,
+      "status": "completed",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "name": "Complete Survey",
+      "reward": 10,
+      "status": "pending",
+      "userId": 1
+    }
+  ]
+}

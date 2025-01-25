@@ -1,0 +1,65 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function isValidReferralUpdate(data) {
+      let diff = request.resource.data.diff(resource.data);
+      return diff.affectedKeys().hasOnly(['numRef', 'referralBal', 'updatedAt']) &&
+             diff.changedKeys().hasOnly(['numRef', 'referralBal', 'updatedAt']);
+    }
+    
+    // Users collection
+    match /users/{userId} {
+      allow read: if true; // Allow reading user docs for referral validation
+      allow create: if isSignedIn() && isOwner(userId);
+      allow update: if isSignedIn() && (
+        isOwner(userId) || 
+        // Allow updating referrer's stats during referral
+        isValidReferralUpdate(request.resource.data)
+      );
+      allow delete: if false; // Users cannot be deleted
+    }
+    
+    // Tasks collection
+    match /tasks/{taskId} {
+      allow read: if isSignedIn();
+      allow create: if false; // Only admin can create tasks
+      allow update: if isSignedIn() && (
+        // User can only update tasks assigned to them
+        resource.data.assignedTo == request.auth.uid ||
+        // And only specific fields
+        (resource.data.assignedTo == null && 
+         request.resource.data.diff(resource.data).affectedKeys()
+         .hasOnly(['assignedTo', 'status', 'updatedAt']))
+      );
+      allow delete: if false; // Tasks cannot be deleted
+    }
+    
+    // Transactions collection
+    match /transactions/{transactionId} {
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update: if false; // Transactions are immutable
+      allow delete: if false; // Transactions cannot be deleted
+    }
+    
+    // Referrals collection
+    match /referrals/{referralId} {
+      allow read: if isSignedIn() && (
+        resource.data.referrerId == request.auth.uid ||
+        resource.data.referredUserId == request.auth.uid
+      );
+      allow create: if isSignedIn();  // Allow creating referrals when signed in
+      allow update: if false; // Referrals are immutable
+      allow delete: if false; // Referrals cannot be deleted
+    }
+  }
+}
